@@ -72,8 +72,11 @@ int main(int argc, char **argv)
 		goto DONE;
 
 	/* You can have eight of these expanders per I2C bus. */
+
+	/*  
 	if (dump_all_regs(fh, MCP_DEVICE_2) < 0)
 		goto DONE; 
+	*/
 
 	/* 
 	  Call this whenever you want to start talking to a different slave 
