@@ -1,0 +1,51 @@
+OVERVIEW
+
+A command line program for demonstrating how to use the 
+Gumstix Overo I2C-3 bus from a userland program. A Microchip 
+MCP23017 I/O Expander is used as the slave device which
+might be useful for some gumstix projects.
+
+No attempt is made to explore all of the MCP23017 features.
+See the datasheet if you want to know what else you can do 
+with these devices. Just google MCP23017.
+
+There is a diagram that shows how to wire things for this
+program, including the logic level conversion you'll need.
+
+
+PARTS
+
+Logic Level Converter from Sparkfun : p/n BOB-08745, $1.95
+I/O Expander from Digi-Key : p/n MCP23017-E/SP-ND, $1.44 
+
+
+BUILDING
+
+The makefile is intended to be run from a workstation that has
+the OE cross-build environment already setup. If you've built
+a gumstix image, then you should be good to go. If not, do that
+first (or if you know better, then why are you even here ;-).   
+
+If you have modified your build TMPDIR then make that change
+to OETMP in the make file. 
+
+After that, the makefile should just work.   
+
+
+RUNNING
+
+Copy the mcptest executable and run it. There are no arguments
+and no options. It's just a simple how-to demo, it's not meant 
+to be useful. 
+
+
+FINAL
+
+Let me know if something doesn't work. I tried to keep it as simple 
+as possible. 
+
+Hopefully, it saves you a little time on your first gumstix I2C 
+project. 
+
+Just trying to pay it forward.
+
