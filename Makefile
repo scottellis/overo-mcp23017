@@ -2,9 +2,9 @@
 # Use the OE built cross-tools to compile for an Overo 
 #
 
-# OETMP = ${OVEROTOP}/tmp
+OETMP = ${OVEROTOP}/tmp
 
-OETMP = /gum2/tmp
+# OETMP = /gum2/tmp
 
 TOOLDIR = /$(OETMP)/cross/armv7a/bin
 
