@@ -3,7 +3,7 @@ OVERVIEW
 A command line program for demonstrating how to use the 
 Gumstix Overo I2C-3 bus from a userland program. A Microchip 
 MCP23017 I/O Expander is used as the slave device which
-might be useful to other gumstix developers.
+might be useful in your project.
 
 No attempt is made to explore all of the MCP23017 features.
 See the datasheet if you want to know what else you can do 
