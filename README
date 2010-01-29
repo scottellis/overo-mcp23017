@@ -3,14 +3,20 @@ OVERVIEW
 A command line program for demonstrating how to use the 
 Gumstix Overo I2C-3 bus from a userland program. A Microchip 
 MCP23017 I/O Expander is used as the slave device which
-might be useful for some gumstix projects.
+might be useful to other gumstix developers.
 
 No attempt is made to explore all of the MCP23017 features.
 See the datasheet if you want to know what else you can do 
-with these devices. Just google MCP23017.
+with these devices. It's easily found on the web. 
 
 There is a diagram that shows how to wire things for this
 program, including the logic level conversion you'll need.
+
+The jumpers from the GPIO PortA to PortB pins is just so
+you can see that something is happening when the program
+toggles I/O. I didn't want to add any more components, like
+a transistor, led, etc... I can't think of a reason why you 
+would ever jumper them this way in a real project. 
 
 
 PARTS
@@ -24,12 +30,17 @@ BUILDING
 The makefile is intended to be run from a workstation that has
 the OE cross-build environment already setup. If you've built
 a gumstix image, then you should be good to go. If not, do that
-first (or if you know better, then why are you even here ;-).   
+first. 
 
-If you have modified your build TMPDIR then make that change
-to OETMP in the make file. 
+If you have modified your OE TMPDIR then make that change
+to OETMP in the make file. It's defined in 
+${OVEROTOP}/build/conf/site.conf (which if you didn't know, 
+then you probably haven't modified it.) 
 
-After that, the makefile should just work.   
+Other then that, the Makefile should just work.   
+
+You can use the Makefile as a template for your own gumstix code
+if you don't want to use the bitbake/recipe framework.
 
 
 RUNNING
@@ -46,6 +57,4 @@ as possible.
 
 Hopefully, it saves you a little time on your first gumstix I2C 
 project. 
-
-Just trying to pay it forward.
 
