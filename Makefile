@@ -6,7 +6,7 @@ OETMP = ${OVEROTOP}/tmp
 
 # OETMP = /gum2/tmp
 
-TOOLDIR = /$(OETMP)/cross/armv7a/bin
+TOOLDIR = $(OETMP)/cross/armv7a/bin
 
 STAGEDIR = $(OETMP)/staging/armv7a-angstrom-linux-gnueabi/usr
 
