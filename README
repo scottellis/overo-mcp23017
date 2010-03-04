@@ -14,9 +14,9 @@ program, including the logic level conversion you'll need.
 
 The jumpers from the GPIO PortA to PortB pins is just so
 you can see that something is happening when the program
-toggles I/O. I didn't want to add any more components, like
-a transistor, led, etc... I can't think of a reason why you 
-would ever jumper them this way in a real project. 
+toggles I/O. I didn't want to add any more components.
+I can't think of a reason why you would ever jumper them 
+this way in a real project. 
 
 
 PARTS
