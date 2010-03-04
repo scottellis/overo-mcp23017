@@ -187,7 +187,7 @@ int read_reg(int fh, uint8_t reg, int count)
 {
 	uint8_t data[2];
 
-	if (count < 0 || count > 2)
+	if (count < 1 || count > 2)
 		return -1;
 
 	data[0] = reg;
