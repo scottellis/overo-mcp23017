@@ -43,6 +43,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 #include <fcntl.h>
 #include <linux/i2c-dev.h>
 
@@ -131,7 +132,7 @@ int main(int argc, char **argv)
 	/* make sure IPOLB.IP0 is 0 and IPOLB.IP1 is 1 */ 
 	val = (result >> 8) & 0xff;
 
-	if (val & IP0 || (val & IP1) != IP1) {
+	if ((val & (IP0 | IP1)) != IP1) {
 		val &= ~IP0;
 		val |= IP1;
 
