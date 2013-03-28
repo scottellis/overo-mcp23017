@@ -89,13 +89,13 @@ int main(int argc, char **argv)
 	}
 
 	printf("\n\nRunning some tests on device 0x20...\n");
+
+	printf("\nSetup direction registers\n");
  
 	result = read_reg(fh, IODIRA, 2);
-
 	if (result == -1) 
 		goto DONE;
-
-	printf("IODIRA 0x%02X  IODIRB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
+	printf("Before: IODIRA 0x%02X  IODIRB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
 
 	/* 
 	  Make GPIOA.GP0 and GPIOA.GP1 outputs. The default state is set or configured 
@@ -120,14 +120,20 @@ int main(int argc, char **argv)
 			goto DONE;
 	}
 
+	result = read_reg(fh, IODIRA, 2);
+	if (result == -1) 
+		goto DONE;
+	printf("After : IODIRA 0x%02X  IODIRB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
+
+
+
+	printf("\nSetup polarity registers\n");
 
 	/* Check the input polarity configuration. */
 	result = read_reg(fh, IPOLA, 2);
-
 	if (result == -1)
 		goto DONE;
-
-	printf("IPOLA 0x%02X  IPOLB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
+	printf("Before: IPOLA 0x%02X  IPOLB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
 
 	/* make sure IPOLB.IP0 is 0 and IPOLB.IP1 is 1 */ 
 	val = (result >> 8) & 0xff;
@@ -140,13 +146,19 @@ int main(int argc, char **argv)
 			goto DONE;
 	}
 
-
-	result = read_reg(fh, GPIOA, 2);
-
+	result = read_reg(fh, IPOLA, 2);
 	if (result == -1)
 		goto DONE;
+	printf("After : IPOLA 0x%02X  IPOLB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
 
-	printf("GPIOA 0x%02X  GPIOB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
+
+
+	printf("\nToggle some I/O values\n");
+
+	result = read_reg(fh, GPIOA, 2);
+	if (result == -1)
+		goto DONE;
+	printf("Before: GPIOA 0x%02X  GPIOB 0x%02X\n", result & 0xff, (result >> 8) & 0xff);
 
 	/* toggle the values of GPIOA.GP0 and GPIOA.GP1, just using GP0's value to test */ 
 	val = (result & 0xFF); 
@@ -159,13 +171,10 @@ int main(int argc, char **argv)
 	if (write_reg(fh, GPIOA, val) == -1)
 		goto DONE;
 	
-	/* see if it worked */ 
 	result = read_reg(fh, GPIOA, 2);
-
 	if (result == -1)
 		goto DONE;
-
-	printf("GPIOA 0x%02X  GPIOB 0x%02X\n\n", result & 0xff, (result >> 8) & 0xff);
+	printf("After : GPIOA 0x%02X  GPIOB 0x%02X\n\n", result & 0xff, (result >> 8) & 0xff);
 
 DONE:
 
