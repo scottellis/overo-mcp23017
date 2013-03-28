@@ -1,37 +1,37 @@
 #
-# Use the OE built cross-tools to compile for an Overo 
+# Use the cross-tools built by the Yocto project to compile for an Overo 
 #
 
-OETMP = ${OVEROTOP}/tmp
-# OETMP = /gum
+### cross-build defs ###
 
-# OE prior to 30July2010
-# TOOLDIR = $(OETMP)/cross/armv7a/bin
-# STAGEDIR = $(OETMP)/staging/armv7a-angstrom-linux-gnueabi/usr
+ifeq ($(strip $(OETMP)),)
+# make things fail if OETMP not defined, point to an invalid location
+	OETMP=/tmp
+endif
 
-# OE after 30July2010
-TOOLDIR = ${OETMP}/sysroots/`uname -m`-linux/usr/armv7a/bin
-STAGEDIR = ${OETMP}/sysroots/armv7a-angstrom-linux-gnueabi/usr
 
-CC = $(TOOLDIR)/arm-angstrom-linux-gnueabi-gcc
+TOOLDIR = $(OETMP)/sysroots/`uname -m`-linux/usr/bin
+STAGEDIR = ${OETMP}/sysroots/overo/usr
 
+CC = ${TOOLDIR}/armv7a-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
 CFLAGS = -Wall
 
 LIBDIR = $(STAGEDIR)/lib
-
 INCDIR = $(STAGEDIR)/include
+
+### end cross-build defs ###
+
 
 TARGET = mcptest
 
-OBJS = main.o 
+$(TARGET) : main.c
+	$(CC) $(CFLAGS) -I $(INCDIR) -L $(LIBDIR) main.c -o $(TARGET)
 
-$(TARGET) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L $(LIBDIR) -o $(TARGET)
 
-main.o: main.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c main.c
+install:
+	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $(TARGET) root@192.168.10.112:/home/root
 
 
 clean:
-	$(RM) $(TARGET) $(OBJS)
+	rm -f $(TARGET)
 
