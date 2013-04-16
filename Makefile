@@ -13,8 +13,11 @@ endif
 TOOLDIR = $(OETMP)/sysroots/`uname -m`-linux/usr/bin
 STAGEDIR = ${OETMP}/sysroots/overo/usr
 
-CC = ${TOOLDIR}/armv7a-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
-CFLAGS = -Wall
+# soft-fp
+# CC = ${TOOLDIR}/armv7a-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
+# hard-fp
+CC = ${TOOLDIR}/armv7ahf-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
+CFLAGS = -Wall -mfloat-abi=hard -mfpu=vfp
 
 LIBDIR = $(STAGEDIR)/lib
 INCDIR = $(STAGEDIR)/include
